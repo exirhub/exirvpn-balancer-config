@@ -5,3 +5,4 @@ sudo systemctl stop x-ui
 sudo chmod +x /root/x-ui.db
 sudo cp /root/x-ui.db /etc/x-ui/x-ui.db
 sudo systemctl start x-ui
+ufw disable
