@@ -16,6 +16,10 @@ echo "Applying TCP buffer optimizations..."
 sudo sysctl -w net.core.rmem_max=67108864
 sudo sysctl -w net.core.wmem_max=67108864
 sudo sysctl -w net.core.netdev_max_backlog=100000
+echo "net.ipv4.tcp_keepalive_time = 60" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_keepalive_intvl = 10" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_keepalive_probes = 6" >> /etc/sysctl.conf
+sysctl -p
 # Persist changes in sysctl.conf
 echo "Saving settings to /etc/sysctl.conf..."
 sudo cat <<EOF >> /etc/sysctl.conf
