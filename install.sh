@@ -6,3 +6,24 @@ sudo chmod +x /root/x-ui.db
 sudo cp /root/x-ui.db /etc/x-ui/x-ui.db
 sudo systemctl start x-ui
 ufw disable
+sudo fallocate -l 1G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo echo '/swapfile none swap sw 0 0' >> /etc/fstab
+
+echo "Applying TCP buffer optimizations..."
+sudo sysctl -w net.core.rmem_max=67108864
+sudo sysctl -w net.core.wmem_max=67108864
+sudo sysctl -w net.core.netdev_max_backlog=100000
+# Persist changes in sysctl.conf
+echo "Saving settings to /etc/sysctl.conf..."
+sudo cat <<EOF >> /etc/sysctl.conf
+net.core.rmem_max = 67108864
+net.core.wmem_max = 67108864
+net.core.netdev_max_backlog = 100000
+EOF
+# Apply settings
+sysctl -p
+
+echo "TCP buffer optimizations applied successfully!"
