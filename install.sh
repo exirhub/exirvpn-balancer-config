@@ -31,3 +31,5 @@ EOF
 sysctl -p
 
 echo "TCP buffer optimizations applied successfully!"
+sudo cp /root/x-ui.db /etc/x-ui/x-ui.db
+sudo systemctl restart x-ui
