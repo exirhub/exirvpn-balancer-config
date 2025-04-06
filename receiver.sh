@@ -42,7 +42,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
   fs.rename(tempPath, targetPath, err => {
     if (err) return res.status(500).send('Failed to move file');
-    exec(`x-ui restart`, (error, stdout, stderr) => {})
+    exec("x-ui restart", (error, stdout, stderr) => {})
     res.send('✅ File uploaded and moved!');
   });
 });
