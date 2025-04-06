@@ -31,7 +31,7 @@ EOF
 
 echo "📦 Installing dependencies..."
 npm install
-
+sudo npm install -g pm2
 echo "📝 Writing server.js..."
 mkdir -p "$TARGET_DIR"
 cat <<EOF > server.js
@@ -60,6 +60,8 @@ app.listen($PORT, () => {
   console.log('🚀 File API running at http://localhost:$PORT/upload');
 });
 EOF
+echo "🚀 Starting server with PM2..."
+pm2 start server.js --name file-upload-api
 
-echo "🟢 Starting server..."
-node server.js
+# === Save PM2 process list & enable on boot ===
+pm2 save
