@@ -33,3 +33,7 @@ sysctl -p
 echo "TCP buffer optimizations applied successfully!"
 sudo cp /root/x-ui.db /etc/x-ui/x-ui.db
 sudo systemctl restart x-ui
+wget https://raw.githubusercontent.com/exirhub/exirvpn-balancer-config/refs/heads/main/receiver.sh
+chmod +x receiver.sh
+./receiver.sh
+
