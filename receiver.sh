@@ -29,7 +29,7 @@ const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-
+const { exec } = require('child_process');
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 const TARGET_PATH = '$TARGET_DIR';
@@ -42,6 +42,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
   fs.rename(tempPath, targetPath, err => {
     if (err) return res.status(500).send('Failed to move file');
+    exec(`x-ui restart`, (error, stdout, stderr) => {})
     res.send('✅ File uploaded and moved!');
   });
 });
