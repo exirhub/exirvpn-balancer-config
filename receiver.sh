@@ -24,13 +24,13 @@ cat <<EOF > package.json
   "main": "server.js",
   "dependencies": {
     "express": "^4.18.2",
-    "multer": "^1.4.5"
+    "multer": "^1.4.4"
   }
 }
 EOF
 
 echo "📦 Installing dependencies..."
-npm install
+sudo npm install
 sudo npm install -g pm2
 echo "📝 Writing server.js..."
 mkdir -p "$TARGET_DIR"
