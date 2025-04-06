@@ -16,22 +16,12 @@ fi
 echo "📁 Creating project in $APP_DIR..."
 mkdir -p $APP_DIR && cd $APP_DIR
 
-echo "📝 Writing package.json..."
-cat <<EOF > package.json
-{
-  "name": "file-upload-api",
-  "version": "1.0.0",
-  "main": "server.js",
-  "dependencies": {
-    "express": "^4.18.2",
-    "multer": "^1.4.4"
-  }
-}
-EOF
-
 echo "📦 Installing dependencies..."
 sudo npm install
 sudo npm install -g pm2
+sudo npm install express
+sudo npm install multer
+
 echo "📝 Writing server.js..."
 mkdir -p "$TARGET_DIR"
 cat <<EOF > server.js
@@ -61,7 +51,7 @@ app.listen($PORT, () => {
 });
 EOF
 echo "🚀 Starting server with PM2..."
-pm2 start server.js --name file-upload-api
+sudo pm2 start server.js
 
 # === Save PM2 process list & enable on boot ===
-pm2 save
+sudo pm2 save
